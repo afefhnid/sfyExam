@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{%  block body %}
+	<div class="row">
+		<div class="col">
+			<h1>Contact</h1>
+			{#
+							fonctions twig de formulaire
+								form_start: crée la balise <form>
+								form_end: ferme la balise <form>
+								form_label: crée un intitulé de champ de saisie, <label>
+									nom du champ défini dans la classe de formulaire (src/Form/ContactType)
+									texte de l'intitulé
+								form_widget: crée le champ de saisie
+									nom du champ défini dans la classe de formulaire (src/Form/ContactType)
+			
+							la variable form est envoyée par le contrôleur
+							le nom des champs de saisie est défini dans la classe de formulaire (src/Form/ContactType)
+			
+							il est nécessaire de créer le bouton de validation du formulaire
+			
+							pour appliquer le thème bootstrap à tous les formulaires
+								ajouter la clé form_themes dans config/packages/twig.yaml
+			
+							pour ajouter des attributs HTML aux champs de saisie,
+								utiliser le second paramètre de form_widget avec la clé attr (attributs)
+			
+							désactiver la validation html, ajouter l'attribut novalidate sur la balise <form>
+						#}
+			{{ form_start(form, { attr: { novalidate: 'novalidate' } }) }}
+			<p>
+				{{ form_label(form.firstname, 'Prénom:') }}
+				{{ form_widget(form.firstname,
+						{ attr:
+							{
+								placeholder: 'Saisissez votre prénom',
+								autofocus: 'autofocus'
+							}
+						}
+					) }}
+			</p>
+			<p>
+				{{ form_label(form.lastname, 'Nom:') }}
+				{{ form_widget(form.lastname) }}
+			</p>
+			<p>
+				{{ form_label(form.email, 'Email:') }}
+				{{ form_widget(form.email) }}
+			</p>
+			<p>
+				{{ form_label(form.message, 'Message:') }}
+				{{ form_widget(form.message) }}
+			</p>
+			<p>
+				<input type="submit" value="Valider" class="btn btn-primary">
+			</p>
+			{{ form_end(form) }}
+		</div>
+	</div>
+{%  endblock %}
